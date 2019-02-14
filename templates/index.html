@@ -8,15 +8,16 @@
     <div class="topbar">
       <a href="about.html">About</a>
       <div class="login">
-        <form action="{{ url_for('dashboard') }} method="post">
+        <form action="{{ url_for('login') }} method="post">
 	  <input type="text" placeholder="Username" name="username">
 	  <input type="text" placeholder="Password" name="passwd">
 	  <button type="submit">Login</button>
 	</form>
       </div>
     </div>
-    <a href="register.html">Register Here!</a>
-   </form>
+    <form action="{{ url_for('register_page') }} method="post">
+        <button type="submit">Register Here!</button>
+    </form>
   </body>
 </html>
   
