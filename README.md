@@ -20,6 +20,9 @@ getting started
 
 pip3 install -r requirements.txt
 
+#for adding forms
+pip install flask-wtf
+
 #environment variables
 
 source export.txt
