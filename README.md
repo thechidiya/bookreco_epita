@@ -1,2 +1,3 @@
-# bookreco_epita
-Python Project  
+# Project 1
+
+Web Programming with Python and JavaScript
