@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html>  
-  <head>
-    <title>Review system</title>
-  </head>
-  <body>
-    <h1>Welcome to book review system</h1>
-    <div class="topbar">
-      <a href="about.html">About</a>
-      <div class="login">
-        <form action="{{ url_for('login') }} method="post">
-	  <input type="text" placeholder="Username" name="username">
-	  <input type="text" placeholder="Password" name="passwd">
-	  <button type="submit">Login</button>
-	</form>
-      </div>
-    </div>
-    <form action="/register" method="post">
-        <button type="submit">Register Here!</button>
-    </form>
-  </body>
-</html>
+{% extends "header.html" %}
+  
+{% block body %}
+    Welcome! 
+{% endblock %}    
   

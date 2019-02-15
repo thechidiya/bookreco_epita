@@ -1,0 +1,18 @@
+{% extends "header.html" %}
+    {% block body %}
+    Enter your credentials!
+
+    <form action="{{ url_for('login') }}" method="POST">
+
+        <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" />
+
+            <label for="pass">Password</label>
+            <input type="password" name="passwd" />
+        </div>
+        
+        <button> Log In </button>
+        
+    </form>
+{% endblock %}

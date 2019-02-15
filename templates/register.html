@@ -6,11 +6,11 @@
     <div class = "container">
         <h1>Register</h4>
         <br>
-        <form action="{{ url_for('register_page') }} method="post">
-            <input type="text" placeholder="Username" name="username">
-            <input type="text" placeholder="Email" name="email">
-	    <input type="text" placeholder="Password" name="password1">
-	    <input type="text" placeholder="Confirm Password" name="password2">
+        <form action="{{ url_for('register_user') }} method="post">
+            <input type="text" placeholder="Username" name="username"><br>
+            <input type="text" placeholder="Email" name="email"><br>
+	    <input type="text" placeholder="Password" name="password1"><br>
+	    <input type="text" placeholder="Confirm Password" name="password2"><br>
             <button type="submit">Register</button>
         </form>
     </div>
