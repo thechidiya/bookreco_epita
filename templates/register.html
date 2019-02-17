@@ -5,13 +5,31 @@
 <body>
     <div class = "container">
         <h1>Register</h4>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info fade in">
+                        <a href="#" class="close" data-dismiss="alert" onclick="parentNode.remove()">&times;</a>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
         <br>
-        <form action="{{ url_for('register_user') }} method="post">
-            <input type="text" placeholder="Username" name="username"><br>
-            <input type="text" placeholder="Email" name="email"><br>
-	    <input type="text" placeholder="Password" name="password1"><br>
-	    <input type="text" placeholder="Confirm Password" name="password2"><br>
-            <button type="submit">Register</button>
+        <form action="{{ url_for('register_user') }}" method="POST" class="col-xs-5">
+            <div class="form-group row">
+                <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+            </div>
+            <div class="form-group row">
+                <input type="text" class="form-control" id="email" placeholder="Email" name="email">
+            </div>
+            <div class="form-group row">
+                <input type="password" class="form-control" id="password1" placeholder="Password" name="password1">
+            </div>
+            <div class="form-group row">
+                <input type="password" class="form-control" id="password2" placeholder="Confirm password" name="password2">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
         </form>
     </div>
 </body>

@@ -17,6 +17,7 @@ api_key = os.getenv("API_KEY_GOODREADS")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config["SESSION_TYPE"] = "filesystem"
 
 # Set up database
@@ -60,28 +61,48 @@ def register_user():
         email = request.form.get("email")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
-        x = db.execute("SELECT * FROM users WHERE (username = username)")
-        if int(x) > 0 or password1 != password2:
+        x = db.execute("SELECT * FROM users WHERE (username = " + username + ")")
+        counter = 0
+        for row in x:
+            counter = counter + 1
+        if int(counter) > 0 or password1 != password2:
             flash("Username is taken, please select another or password doesn't match")
             return render_template("register.html")
-    else:
-        db.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)")
-        db.commit()
-        flash("Thanks for registering!")
-        session['logged_in'] = True
-        session['username'] = username
-        return redirect(url_for('dashboard'))
+        else:
+            #db.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)")
+            #db.commit()
+            flash("Thanks for registering!")
+            session['logged_in'] = True
+            session['username'] = username
+            return redirect(url_for('dashboard'))
 
 @app.route("/dashboard",methods=["GET", "POST"] )
 def dashboard():
     try:
-        db.execute("SELECT * from books")
-        data = db.fetchall()
-        return data
-        
+        data = db.execute("SELECT * from books")        
         return render_template("dashboard.html", data=data)
         
     except Exception as e:
         return (str(e))
+
+@app.route("/search",methods=["GET", "POST"] )
+def search():
+    if request.method == "POST":
+        isbn = request.form.get("isbn")
+        title = request.form.get("title")
+        author = request.form.get("author")
+        year = request.form.get("year")
+        str_sql = "SELECT * FROM books WHERE 1=1"
+        if isbn:
+            str_sql += " AND (isbn='"+isbn+"')"
+        if title:
+            str_sql += " AND (title="+title+")"
+        if author:
+            str_sql += " AND (author="+author+")"
+        if year:
+            str_sql += " AND (year='"+year+"')"
+        data = db.execute(str_sql)
+        print(str_sql)
+        return render_template("dashboard.html", data=data)
 
 
