@@ -1,6 +1,14 @@
 {% extends "header.html" %}
   
 {% block body %}
-    Welcome! 
+<body>
+    <div class="container">
+        {% if session['username'] %}
+            <h1>Welcome {{ session['username'] }}!</h1>
+        {% else %}
+            <h1>Welcome! Log in to see the books</h1>
+        {% endif %}
+    </div>
+</body>
 {% endblock %}    
   

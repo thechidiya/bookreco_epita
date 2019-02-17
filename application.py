@@ -33,9 +33,14 @@ def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("passwd")
-        isExist = db.execute("SELECT username FROM users WHERE (username=username) AND (password=password)")
-        if int(isExist) > 0:
-            return render_template("dashboard.html")
+        x = db.execute("SELECT username FROM users WHERE (username=username) AND (password=password)")
+        counter = 0
+        for row in x:
+            counter = counter + 1
+        if int(counter) > 0:
+            session['logged_in'] = True
+            session['username'] = username
+            return redirect(url_for('dashboard'))
         else:
             return render_template("login.html")
     else:
@@ -47,7 +52,7 @@ def logout():
     # Forget any user_id
     session.clear()
     # Redirect user to default
-    return redirect("/")
+    return redirect("/login")
 
 @app.route("/register",methods=["GET", "POST"] )
 def register():
