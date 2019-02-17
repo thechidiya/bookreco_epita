@@ -2,7 +2,16 @@
     {% block body %}
     <div class="container">
         <h1>Enter your credentials!</h1>
-
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info fade in">
+                    <a href="#" class="close" data-dismiss="alert" onclick="parentNode.remove()">&times;</a>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
         <form action="{{ url_for('login') }}" method="POST" class="col-xs-5">
             <div class="form-group row">
                 <input type="text" class="form-control" id="username" placeholder="Username" name="username">

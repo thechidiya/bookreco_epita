@@ -65,12 +65,18 @@ def register_user():
         counter = 0
         for row in x:
             counter = counter + 1
-        if int(counter) > 0 or password1 != password2:
-            flash("Username is taken, please select another or password doesn't match")
+        if int(counter) > 0:
+            flash("Username is taken, please select another")
+            return render_template("register.html")
+        elif password1 != password2:
+            flash("Passwords do not match, try again")
+            return render_template("register.html")
+        elif not email:
+            flash("Please enter email")
             return render_template("register.html")
         else:
-            #db.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)")
-            #db.commit()
+            db.execute("INSERT INTO users (username, password, email) VALUES ('"+username+"', '"+password1+"', '"+email+"')")
+            db.commit()
             flash("Thanks for registering!")
             session['logged_in'] = True
             session['username'] = username
