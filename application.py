@@ -107,9 +107,9 @@ def search():
         if isbn:
             str_sql += " AND (isbn='"+isbn+"')"
         if title:
-            str_sql += " AND (title="+title+")"
+            str_sql += " AND (title='"+title+"')"
         if author:
-            str_sql += " AND (author="+author+")"
+            str_sql += " AND (author='"+author+"')"
         if year:
             str_sql += " AND (year='"+year+"')"
         data = db.execute(str_sql)
